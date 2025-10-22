@@ -3,7 +3,7 @@ import { getFirestore } from "firebase/firestore";
 
 // Credenciales
 const fallbackConfig = {
-  apiKey: "AIzaSyA1O58vB9lj2WAoTS8tCXwJPPjGklx8v3s",
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   authDomain: "revival-leyends.firebaseapp.com",
   projectId: "revival-leyends",
   storageBucket: "revival-leyends.firebasestorage.app",
