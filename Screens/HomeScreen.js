@@ -1,23 +1,38 @@
-import React from "react";
-import { View, ScrollView, Text } from "react-native";
+import React, {useContext} from "react";
+import { View, ScrollView, Text, ActivityIndicator, StyleSheet } from "react-native";
 import HeaderTiny from "../components/HeaderTiny";
 import VerticalCard from "../components/VerticalCard";
 import globalStyles from "../styles/globalStyles";
+import { JuegosContext } from "../context/JuegosContext";
 
-const juegos = [
-  { id: 1, nombre: "Hollow Knight Silksong", portada: "https://i.ibb.co/JWQcS4q0/imagen-2025-09-24-235146030.png" },
-  { id: 2, nombre: "GTA V", portada: "https://i.ibb.co/GvT0Hy8d/imagen-2025-09-24-235440672.png" },
-  { id: 3, nombre: "Fortnite", portada: "https://i.ibb.co/PYdZz1j/fantasy-battle.jpg" },
-  { id: 4, nombre: "Minecraft", portada: "https://i.ibb.co/6N8DqzH/fantasy-forest.jpg" },
-  { id: 5, nombre: "Dark Souls", portada: "https://i.ibb.co/q7Z5x1G/fantasy-castle.jpg" },
-];
 
 export default function HomeScreen() {
+  const { juegos, cargando, error } = useContext(JuegosContext);
+
+  if (cargando) {
+    return (
+      <View style={[globalStyles.homeContainer, styles.centerContent]}>
+        <ActivityIndicator size="large" color="#007AFF" /> 
+        <Text style={styles.loadingText}>Cargando catálogo...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={[globalStyles.homeContainer, styles.centerContent]}>
+        <Text style={styles.errorText}>⚠️ Error: {error}</Text>
+        <Text style={styles.errorHint}>Revisa tu conexión o reglas de Firebase.</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={globalStyles.homeContainer}>
       <HeaderTiny />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={globalStyles.sectionTitle}>Elige tu aventura</Text>
+        
         {juegos.map((juego) => (
           <VerticalCard key={juego.id} juego={juego} />
         ))}
@@ -25,3 +40,10 @@ export default function HomeScreen() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  centerContent: { flex: 1, justifyContent: 'center', alignItems: 'center', },
+  loadingText: { marginTop: 10, fontSize: 16, color: '#007AFF', },
+  errorText: { fontSize: 18, fontWeight: 'bold', color: '#FF3B30', textAlign: 'center', marginBottom: 5, },
+  errorHint: { fontSize: 14, color: '#8E8E93', textAlign: 'center', }
+});

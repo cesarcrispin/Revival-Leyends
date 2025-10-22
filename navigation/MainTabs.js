@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 
 export default function MainTabs({ setIsLoggedIn }) {
   return (
-    <Tab.Navigator
+    <Tab.Navigator 
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color }) => {
           const size = 22;
@@ -24,7 +24,7 @@ export default function MainTabs({ setIsLoggedIn }) {
         tabBarInactiveTintColor: "gray",
         headerShown: false,
         tabBarStyle: { backgroundColor: "#1a1a1a", borderTopColor: "#d4af37", height: 55 },
-      })}
+      })} 
     >
       <Tab.Screen name="Inicio" component={HomeScreen} />
       <Tab.Screen name="Mercado" component={OffersScreen} />

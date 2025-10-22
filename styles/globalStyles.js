@@ -39,15 +39,6 @@ export default StyleSheet.create({
     fontSize: 18, 
     color: "#fff" },
 
-  unlockButton: { 
-    backgroundColor: "#d4af37", 
-    paddingVertical: 6, 
-    paddingHorizontal: 12, 
-    borderRadius: 8 },
-
-  unlockButtonText: { 
-    fontSize: 14, 
-    color: "#1a1a1a" },
 
   headerTiny: { 
     height: 45, 
@@ -80,3 +71,4 @@ export default StyleSheet.create({
     top: 10 },
 
 });
+

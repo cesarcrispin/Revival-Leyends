@@ -38,8 +38,13 @@ export default function LoginScreen({ setIsLoggedIn }) {
         />
 
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>INGRESAR AL REINO</Text>
+          <Text style={styles.buttonText}>INGRESAR AL REINO</Text>  
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonOmitir} onPress={() => setIsLoggedIn(true)}>
+          <Text style={styles.buttonOmitir}>Omitir</Text>
+        </TouchableOpacity>
+
       </View>
     </ImageBackground>
   );
@@ -91,6 +96,10 @@ const styles = StyleSheet.create({
 
   buttonText: { 
     color: "#1a1a1a", 
-    fontSize: 18 }
-    
+    fontSize: 18 },
+
+  buttonOmitir: { 
+    marginTop: 15,
+    alignItems: "center",
+    color: "#d4af37"  }    
 });
