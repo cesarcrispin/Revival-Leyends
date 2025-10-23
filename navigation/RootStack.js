@@ -20,10 +20,16 @@ export default function RootStack() {
           {(props) => <MainTabs {...props} setIsLoggedIn={setIsLoggedIn} />}
         </Stack.Screen>
       )}
-      <Stack.Screen 
-        name="DetailScreen" 
-        component={DetailScreen} 
-        options={{ presentation: 'modal' }} // Modal para detalles
+        <Stack.Screen
+          name="DetailScreen"
+          component={DetailScreen}
+          options={{
+          presentation: 'transparentModal',
+          animation: 'slide_from_bottom',
+          headerShown: false,
+          contentStyle: { backgroundColor: 'transparent' } 
+      }}
+
       />
     </Stack.Navigator>
   );

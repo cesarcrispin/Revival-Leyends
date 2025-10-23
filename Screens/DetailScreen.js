@@ -1,9 +1,10 @@
-// Screens/DetailScreen.js (MODIFICADO para Modal/Bottom Sheet)
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, ActivityIndicator, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { getJuegoDetalles } from '../context/JuegosContext'; 
-// Importamos useRoute para params y useNavigation para cerrar
 import { useRoute, useNavigation } from '@react-navigation/native'; 
+import imagenes from '../assets/imagenes.json';
+
 
 const { height } = Dimensions.get('window'); // Obtener altura de la pantalla
 
@@ -16,7 +17,7 @@ export default function DetailScreen() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
-  // Lógica de carga de detalles (MISMA QUE ANTES)
+
   useEffect(() => {
     const cargarDetalles = async () => {
  
@@ -33,6 +34,9 @@ export default function DetailScreen() {
     cargarDetalles();
   }, [juegoId]);
 
+  const imagenEncontrada = imagenes.find(img => img.id === juegoId);
+  const imagenUrl = imagenEncontrada ? imagenEncontrada.url : null;
+
   //Funciones de Botones
   const handleCerrar = () => {
     //Cierra el modal (vuelve a la pantalla anterior)
@@ -44,6 +48,7 @@ export default function DetailScreen() {
     alert(` añadido al carrito`);
 
   };
+
 
   if (cargando) {
     return <ActivityIndicator size="large" style={styles.loading} />;
@@ -73,7 +78,7 @@ export default function DetailScreen() {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         
         {/* Imagen de Portada */}
-        <Image source={{ uri: juegoDetalle.url_imagen }} style={styles.image} />
+        <Image source={{ uri: imagenUrl }} style={styles.image} />
         
         <View style={styles.infoContainer}>
           <Text style={styles.title}>{juegoDetalle.nombre}</Text>
@@ -103,6 +108,24 @@ export default function DetailScreen() {
 
 // Estilos específicos para la vista parcial (Modal/Bottom Sheet)
 const styles = StyleSheet.create({
+
+modalContainer: {
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  height: height * 0.85, // mantiene el 85% de altura
+  backgroundColor: '#121212',
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  overflow: 'hidden',
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: -5 },
+  shadowOpacity: 0.25,
+  shadowRadius: 5,
+  elevation: 10,
+},
+
   loading: { 
     flex: 1, 
     backgroundColor: '#121212)', 
@@ -115,20 +138,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     borderRadius: 20
   },
-  modalContainer: {
-    // Hace que la vista ocupe 80% de la altura de la pantalla
-    height: height * 0.85, 
-    marginTop: height * 0.15, // Empuja hacia abajo para dejar ver el fondo
-    backgroundColor: '#121212',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    overflow: 'hidden', // Necesario para que el radio no se corte
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -5 },
-    shadowOpacity: 0.25,
-    shadowRadius: 5,
-    elevation: 10,
-  },
+
   closeButton: {
     position: 'absolute',
     top: 10,
