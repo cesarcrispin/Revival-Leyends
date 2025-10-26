@@ -1,4 +1,3 @@
-  
 import React from "react";
 import { View, Image, TouchableOpacity } from "react-native";
 import { Search } from "lucide-react-native";

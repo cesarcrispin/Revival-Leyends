@@ -1,13 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Castle, ScrollText, Package, Shield, SettingsIcon } from "lucide-react-native";
-
 import HomeScreen from "../Screens/HomeScreen.js";
 import OffersScreen from "../Screens/OffersScreen.js";
 import CartScreen from "../Screens/CartScreen.js";
 import ProfileScreen from "../Screens/ProfileScreen.js";
 import ConfigScreen from "../Screens/ConfigScreen.js";  
-import { Settings } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,7 +32,6 @@ export default function MainTabs({ setIsLoggedIn }) {
       <Tab.Screen name="Tesoro" component={CartScreen} />
       <Tab.Screen name="Configuracion" component={ConfigScreen}/>
       <Tab.Screen name="Perfil">
-        
         {(props) => <ProfileScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
       </Tab.Screen>
     </Tab.Navigator>
