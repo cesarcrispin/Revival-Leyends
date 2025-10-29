@@ -1,12 +1,13 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, ScrollView, ActivityIndicator, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { getJuegoDetalles } from '../context/JuegosContext'; 
 import { useRoute, useNavigation } from '@react-navigation/native'; 
 import imagenes from '../assets/imagenes.json';
+import { useCart } from '../context/CartContext';
+import { Alert } from 'react-native';
 
 
-const { height } = Dimensions.get('window'); // Obtener altura de la pantalla
+const { height } = Dimensions.get('window'); //altura de la pantalla
 
 export default function DetailScreen() {
   const route = useRoute();
@@ -16,7 +17,7 @@ export default function DetailScreen() {
   const [juegoDetalle, setJuegoDetalle] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-
+  const { addItemToCart } = useCart();
 
   useEffect(() => {
     const cargarDetalles = async () => {
@@ -37,18 +38,30 @@ export default function DetailScreen() {
   const imagenEncontrada = imagenes.find(img => img.id === juegoId);
   const imagenUrl = imagenEncontrada ? imagenEncontrada.url : null;
 
-  //Funciones de Botones
+
   const handleCerrar = () => {
-    //Cierra el modal (vuelve a la pantalla anterior)
+    //Cierra el modal vuelve a la pantalla anterior
     navigation.goBack(); 
   };
   
   const handleAnadirCarrito = () => {
 
-    alert(` añadido al carrito`);
+        if (!juegoDetalle) {
+        Alert.alert("Error", "No se pudo obtener la información del juego.");
+        return;
+        }
+
+    const gameToAdd = {
+        // Usamos el ID de Firebase juegoId como identificador
+        id: juegoId, 
+        // Usamos el nombre del juego
+        title: juegoDetalle.nombre,
+        // Usamos el precio para las operaciones del carrito
+        price: parseFloat(juegoDetalle.precio) || 0, 
+    };
+    addItemToCart(gameToAdd);
 
   };
-
 
   if (cargando) {
     return <ActivityIndicator size="large" style={styles.loading} />;
@@ -106,7 +119,6 @@ export default function DetailScreen() {
   );
 }
 
-// Estilos específicos para la vista parcial (Modal/Bottom Sheet)
 const styles = StyleSheet.create({
 
 modalContainer: {
@@ -172,7 +184,7 @@ modalContainer: {
   price: {
     fontSize: 22,
     fontWeight: '600',
-    color: '#4CAF50', // Verde para el precio
+    color: '#4CAF50',
   },
   separator: {
     height: 1,
@@ -196,7 +208,7 @@ modalContainer: {
     lineHeight: 24,
   },
   addToCartButton: {
-    backgroundColor: '#007AFF', // Azul primario
+    backgroundColor: '#007AFF',
     padding: 15,
     margin: 10,
     borderRadius: 10,
@@ -207,4 +219,10 @@ modalContainer: {
     fontSize: 18,
     fontWeight: 'bold',
   },
+    errorText: { 
+    color: '#f05a5a',
+    fontSize: 18,
+    textAlign: 'center',
+    marginTop: 50,
+  }
 });

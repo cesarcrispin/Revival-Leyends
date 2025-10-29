@@ -1,11 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Castle, ScrollText, Package, Shield, SettingsIcon } from "lucide-react-native";
+import { Castle, ScrollText, Package, Shield, SettingsIcon, StarHalfIcon, StarIcon } from "lucide-react-native";
 import HomeScreen from "../Screens/HomeScreen.js";
 import OffersScreen from "../Screens/OffersScreen.js";
 import CartScreen from "../Screens/CartScreen.js";
 import ProfileScreen from "../Screens/ProfileScreen.js";
-import ConfigScreen from "../Screens/ConfigScreen.js";  
+import ExpScreen from "../Screens/ExpScreen.js";  
 
 const Tab = createBottomTabNavigator();
 
@@ -16,10 +16,10 @@ export default function MainTabs({ setIsLoggedIn }) {
         tabBarIcon: ({ color }) => {
           const size = 22;
           if (route.name === "Inicio") return <Castle size={size} color={color} />;
-          if (route.name === "Mercado") return <ScrollText size={size} color={color} />;
+          if (route.name === "Novedades") return <ScrollText size={size} color={color} />;
           if (route.name === "Tesoro") return <Package size={size} color={color} />;
           if (route.name === "Perfil") return <Shield size={size} color={color} />
-          if (route.name === "Configuracion") return <SettingsIcon size={size} color={color} />;
+          if (route.name === "Experiencia") return <StarIcon size={size} color={color} />;
         },
         tabBarActiveTintColor: "#d4af37",
         tabBarInactiveTintColor: "gray",
@@ -28,9 +28,9 @@ export default function MainTabs({ setIsLoggedIn }) {
       })} 
     >
       <Tab.Screen name="Inicio" component={HomeScreen} />
-      <Tab.Screen name="Mercado" component={OffersScreen} />
+      <Tab.Screen name="Novedades" component={OffersScreen} />
       <Tab.Screen name="Tesoro" component={CartScreen} />
-      <Tab.Screen name="Configuracion" component={ConfigScreen}/>
+      <Tab.Screen name="Experiencia" component={ExpScreen}/>
       <Tab.Screen name="Perfil">
         {(props) => <ProfileScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
       </Tab.Screen>

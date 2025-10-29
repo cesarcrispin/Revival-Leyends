@@ -5,7 +5,7 @@ import App from '../config/firebase.js';
 //Inicia la autenticacion
 const auth = getAuth(App); 
 
-// Almacena el token del usuario, la informacion
+// Almacena el token del usuario, informacion
 export const AuthContext = createContext({
     user: null,         // El objeto de usuario de Firebase
     isLoading: true,    // Para saber si Firebase terminó de chequear la sesión

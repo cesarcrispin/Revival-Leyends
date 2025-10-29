@@ -17,7 +17,6 @@ export default function HomeScreen() {
       </View>
     );
   }
-
   if (error) {
     return (
       <View style={[globalStyles.homeContainer, styles.centerContent]}>
@@ -34,7 +33,7 @@ export default function HomeScreen() {
         <Text style={globalStyles.sectionTitle}>Elige tu aventura</Text>
         
         {juegos.map((juego) => (
-          <VerticalCard key={juego.id} juego={juego} />
+        <VerticalCard key={juego.id} juego={juego} />
         ))}
       </ScrollView>
     </View>
@@ -42,8 +41,24 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  centerContent: { flex: 1, justifyContent: 'center', alignItems: 'center', },
-  loadingText: { marginTop: 10, fontSize: 16, color: '#007AFF', },
-  errorText: { fontSize: 18, fontWeight: 'bold', color: '#FF3B30', textAlign: 'center', marginBottom: 5, },
-  errorHint: { fontSize: 14, color: '#8E8E93', textAlign: 'center', }
+  centerContent: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+  },
+  loadingText: { 
+    marginTop: 10, 
+    fontSize: 16, 
+    color: '#007AFF', 
+  },
+  errorText: { 
+    fontSize: 18, 
+    fontWeight: 'bold', 
+    color: '#FF3B30', 
+    textAlign: 'center', 
+    marginBottom: 5, },
+  errorHint: { 
+    fontSize: 14, 
+    color: '#8E8E93', 
+    textAlign: 'center', }
 });

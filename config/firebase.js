@@ -3,7 +3,7 @@ import { getFirestore } from "firebase/firestore";
 
 // Credenciales
 const fallbackConfig = {
-  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+  apiKey: "AIzaSyCp0cfiVfx5KWgXHpiKYSlMsqvxDQJd7rw",
   authDomain: "revival-leyends.firebaseapp.com",
   projectId: "revival-leyends",
   storageBucket: "revival-leyends.firebasestorage.app",
@@ -11,9 +11,6 @@ const fallbackConfig = {
   appId: "1:490541853941:web:b0f465478dd936837b69bc",
   measurementId: "G-N0BPJPXY79"
 };
-
-console.log("CLAVE API LEÍDA:", process.env.REACT_APP_GOOGLE_API_KEY ? "CARGADA" : "NO CARGADA o VACÍA");
-console.log("CONFIGURACIÓN FIREBASE:", fallbackConfig.apiKey);
 
 // Usa la configuración inyectada por el entorno o el fallback
 const firebaseConfig = typeof __firebase_config !== 'undefined' 

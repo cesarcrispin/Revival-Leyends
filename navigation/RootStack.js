@@ -14,8 +14,8 @@ export default function RootStack() {
   const { user, isLoading } = useContext(AuthContext); 
 
     if (isLoading) {
-    //componente de carga (ej. <LoadingScreen
-    // Por ahora se va a devolver un View vacío.
+    //componente de carga ej.LoadingScreen
+    //Por ahora se va a devolver un View vacío.
     return <></>; 
   }
   
@@ -44,6 +44,5 @@ export default function RootStack() {
             contentStyle: { backgroundColor: 'transparent' }
           }}
           />
-         
-        </Stack.Navigator>);
+         </Stack.Navigator>);
 }

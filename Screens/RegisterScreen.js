@@ -84,7 +84,7 @@ export default function RegisterScreen({ navigation }) {
                     autoCapitalize="none"
                 />
                 <TextInput
-                    placeholder="Contraseña (mínimo 6 chars)"
+                    placeholder="Contraseña (mínimo 6 caracteres)"
                     placeholderTextColor="#c9a46b"
                     style={styles.input}
                     secureTextEntry
